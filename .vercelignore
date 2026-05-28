@@ -1,0 +1,7 @@
+node_modules
+.next
+*.HEIC
+*.heic
+album_fotos
+album_hires
+crops
