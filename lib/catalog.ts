@@ -107,6 +107,7 @@ function teamSection(t: TeamDef): Section {
 
 // FWC specials — seed: true = tem a figurinha colada.
 const FWC_STICKERS: Sticker[] = [
+  { code: "FWC 00", label: "FWC 00 — We Are Panini", seed: false },
   { code: "FWC 1",  label: "FWC 1 — Abertura",       seed: false },
   { code: "FWC 2",  label: "FWC 2 — Abertura",       seed: false },
   { code: "FWC 3",  label: "FWC 3 — Abertura",       seed: true  },

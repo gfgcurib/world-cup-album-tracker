@@ -135,8 +135,6 @@ export default function AlbumTracker() {
         </div>
 
         <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
-          <Chip label="Brasil"     value={`${stats.bra}/${stats.braTotal}`}   color="#FFCB05" />
-          <Chip label="Coca-Cola"  value={`${stats.coca}/${stats.cocaTotal}`} color="#E61A27" />
           {!loaded && <span className="text-white/35">carregando…</span>}
           {saving  && <span className="text-white/35">salvando…</span>}
           {offline && (
