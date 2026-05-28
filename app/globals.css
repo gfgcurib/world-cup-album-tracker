@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(15, 181, 165, 0.18), transparent 60%),
+    radial-gradient(1000px 500px at 110% 0%, rgba(230, 0, 126, 0.16), transparent 55%),
+    radial-gradient(900px 700px at 50% 120%, rgba(122, 77, 214, 0.14), transparent 60%),
+    #07142b;
+  color: #eaf1ff;
+  min-height: 100vh;
+}
+
+/* faixas coloridas estilo Copa no topo */
+.wc-stripes {
+  background: linear-gradient(
+    90deg,
+    #0fb5a5 0 20%,
+    #ffc72c 20% 40%,
+    #e6007e 40% 60%,
+    #7a4dd6 60% 80%,
+    #e4002b 80% 100%
+  );
+}
+
+.sticker-shine {
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.22), transparent 45%);
+}
