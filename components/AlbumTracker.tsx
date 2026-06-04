@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { SECTIONS, TOTAL, type Section, type Sticker } from "@/lib/catalog";
+import { buildShareMessage } from "@/lib/whatsapp";
 
 type Filter = "todas" | "faltando" | "coletadas";
 
@@ -93,17 +94,20 @@ export default function AlbumTracker() {
   return (
     <main className="mx-auto max-w-6xl px-4 pb-32 pt-6 sm:px-6">
       {/* Header */}
-      <header className="mb-6">
-        <p className="text-xs font-bold uppercase tracking-[0.3em] text-amber-400">
-          FIFA World Cup 2026
-        </p>
-        <h1 className="mt-1 text-3xl font-extrabold sm:text-5xl">
-          Álbum da Copa · Tracker
-        </h1>
-        <p className="mt-2 text-sm text-white/55">
-          Marque as figurinhas conforme conseguir. Salva automaticamente e aparece
-          pra você e pra sua noiva.
-        </p>
+      <header className="mb-6 flex items-start justify-between gap-4">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.3em] text-amber-400">
+            FIFA World Cup 2026
+          </p>
+          <h1 className="mt-1 text-3xl font-extrabold sm:text-5xl">
+            Álbum da Copa · Tracker
+          </h1>
+          <p className="mt-2 text-sm text-white/55">
+            Marque as figurinhas conforme conseguir. Salva automaticamente e aparece
+            pra você e pra sua noiva.
+          </p>
+        </div>
+        <ShareButton overrides={overrides} />
       </header>
 
       {/* Progress */}
@@ -230,6 +234,47 @@ export default function AlbumTracker() {
         </div>
       )}
     </main>
+  );
+}
+
+// ─── ShareButton ─────────────────────────────────────────────────────────────
+
+function ShareButton({ overrides }: { overrides: Record<string, boolean> }) {
+  const [state, setState] = useState<"idle" | "copied" | "error">("idle");
+
+  async function handleCopy() {
+    const msg = buildShareMessage(SECTIONS, overrides);
+    try {
+      await navigator.clipboard.writeText(msg);
+      setState("copied");
+      setTimeout(() => setState("idle"), 2500);
+    } catch {
+      setState("error");
+      setTimeout(() => setState("idle"), 2500);
+    }
+  }
+
+  return (
+    <button
+      onClick={handleCopy}
+      title="Copiar lista de figurinhas faltando para o WhatsApp"
+      className={[
+        "mt-1 shrink-0 flex items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-semibold transition-all active:scale-95 sm:px-4 sm:text-sm",
+        state === "copied"
+          ? "border-emerald-500/50 bg-emerald-500/15 text-emerald-300"
+          : state === "error"
+          ? "border-rose-500/50 bg-rose-500/15 text-rose-300"
+          : "border-white/15 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white",
+      ].join(" ")}
+    >
+      {state === "copied" ? (
+        <>✓ Copiado!</>
+      ) : state === "error" ? (
+        <>⚠ Erro</>
+      ) : (
+        <>📋 Faltando p&frasl; WhatsApp</>
+      )}
+    </button>
   );
 }
 
