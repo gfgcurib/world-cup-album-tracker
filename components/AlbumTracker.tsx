@@ -94,20 +94,20 @@ export default function AlbumTracker() {
   return (
     <main className="mx-auto max-w-6xl px-4 pb-32 pt-6 sm:px-6">
       {/* Header */}
-      <header className="mb-6 flex items-start justify-between gap-4">
-        <div>
+      <header className="mb-6">
+        <div className="flex items-center justify-between gap-3">
           <p className="text-xs font-bold uppercase tracking-[0.3em] text-amber-400">
             FIFA World Cup 2026
           </p>
-          <h1 className="mt-1 text-3xl font-extrabold sm:text-5xl">
-            Álbum da Copa · Tracker
-          </h1>
-          <p className="mt-2 text-sm text-white/55">
-            Marque as figurinhas conforme conseguir. Salva automaticamente e aparece
-            pra você e pra sua noiva.
-          </p>
+          <ShareButton overrides={overrides} />
         </div>
-        <ShareButton overrides={overrides} />
+        <h1 className="mt-1 text-3xl font-extrabold sm:text-5xl">
+          Álbum da Copa · Tracker
+        </h1>
+        <p className="mt-2 text-sm text-white/55">
+          Marque as figurinhas conforme conseguir. Salva automaticamente e aparece
+          pra você e pra sua noiva.
+        </p>
       </header>
 
       {/* Progress */}
@@ -272,7 +272,7 @@ function ShareButton({ overrides }: { overrides: Record<string, boolean> }) {
       ) : state === "error" ? (
         <>⚠ Erro</>
       ) : (
-        <>📋 Faltando p&frasl; WhatsApp</>
+        <>📋 Copiar faltantes</>
       )}
     </button>
   );
